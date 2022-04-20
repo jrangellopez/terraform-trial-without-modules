@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "s3Bucket" {
-  bucket = "jrangelpersonal_sonarcloud"
+  bucket = "jrangelpersonal-sonarcloud"
   acl    = "public-read"
 
   policy = <<EOF
@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "s3Bucket" {
              "s3:GetObject"
           ],
          "effect" : "Allow",
-         "resource" : "arn:aws:s3:::jrangelpersonal_sonarcloud/*",
+         "resource" : "arn:aws:s3:::jrangelpersonal-sonarcloud/*",
          "principal" : "*"
       }
     ]

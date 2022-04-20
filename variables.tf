@@ -30,7 +30,7 @@ variable "token_url" {
 
 variable "bucket_name" {
   type    = string
-  default = "jrangelpersonal_sonarcloud"
+  default = "jrangelpersonal-sonarcloud"
 }
 
 variable "aws_region" {
