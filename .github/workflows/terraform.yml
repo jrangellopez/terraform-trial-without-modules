@@ -1,68 +1,76 @@
-# ####################
-# ## GitHub Actions ##
-# ####################
-# name: Deploy Infrastructure
+####################
+## GitHub Actions ##
+####################
+name: Deploy Infrastructure
 
-# ###############################
-# ## Start the job on all push ##
-# ###############################
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     types: [opened, synchronize, reopened]
+###############################
+## Start the job on all push ##
+###############################
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
 
-# #################
-# ## Set the job ##
-# #################
-# jobs:
-#   terraform:
-#     name: Terraform
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         # Use the Bash shell regardless of the runner
-#         shell: bash
-#         # working-directory: '.'
-#     steps:
+#################
+## Set the job ##
+#################
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        # Use the Bash shell regardless of the runner
+        shell: bash
+        # working-directory: '.'
+    steps:
 
-#     # Checkout the repository to the Github Actions runner
-#     - name: Clone Repository
-#       uses: actions/checkout@v2
+    # Checkout the repository to the Github Actions runner
+    - name: Clone Repository
+      uses: actions/checkout@v2
 
-#     # Install the latest version of Terraform CLI
-#     # - name: Setup Terraform
-#     #   uses: hashicorp/setup-terraform@v1.0.1
+    # Install the latest version of Terraform CLI
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v1.0.1
 
-#     #Initialize a new or existing Terraform working directoy by creating initial files, loading any remote state, downloading modules, etc.
-#     - name: Terraform Init
-#       run: terraform init
+    #Initialize a new or existing Terraform working directoy by creating initial files, loading any remote state, downloading modules, etc.
+    # - name: Terraform Init
+    #   run: terraform init
 
-#     # - name: Terraform Init
-#     #   uses: hashicorp/terraform-github-actions/init@v0.4.0
-#     #   env:
-#     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#     #     TF_ACTION_WORKING_DIR: '.'
-#     #     AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-#     #     AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions/init@v0.4.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: 'terraform'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-#     # - name: Terraform Validate
-#     #   uses: hashicorp/terraform-github-actions/validate@v0.3.7
+    # - name: Terraform Init
+    #   uses: hashicorp/terraform-github-actions/init@v0.4.0
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     TF_ACTION_WORKING_DIR: '.'
+    #     AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-#     # - name: Terraform Apply
-#     #   uses: hashicorp/terraform-github-actions/apply@v0.4.0
-#     #   env:
-#     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#     #     TF_ACTION_WORKING_DIR: '.'
-#     #     AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-#     #     AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    # - name: Terraform Validate
+    #   uses: hashicorp/terraform-github-actions/validate@v0.3.7
 
-#     # - name: Sync S3
-#     #   uses: jakejarvis/s3-sync-action@master
-#     #   env:
-#     #     SOURCE_DIR: './environments/dev'
-#     #     AWS_REGION: 'eu-central-1'
-#     #     AWS_S3_BUCKET: 'jrangelpersonal_sonarcloud'
-#     #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#     #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    # - name: Terraform Apply
+    #   uses: hashicorp/terraform-github-actions/apply@v0.4.0
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     TF_ACTION_WORKING_DIR: '.'
+    #     AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    # - name: Sync S3
+    #   uses: jakejarvis/s3-sync-action@master
+    #   env:
+    #     SOURCE_DIR: './environments/dev'
+    #     AWS_REGION: 'eu-central-1'
+    #     AWS_S3_BUCKET: 'jrangelpersonal_sonarcloud'
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
